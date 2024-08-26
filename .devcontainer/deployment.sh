@@ -26,3 +26,9 @@ envsubst < .devcontainer/dynakube.yaml | kubectl apply -f -
 
 # deploy microservices
 kubectl apply -f ./release_demo/kubernetes-manifests.yaml
+
+# wait for pods to be ready before port forwarding
+kubectl rollout status deployment frontend
+
+# forward all traffic to 8080 on the local machine
+kubectl port-forward deployment/frontend 8080:8080
