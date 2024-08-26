@@ -23,3 +23,6 @@ helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operato
 # Apply the Dynakube in ApplicationOnly mode
 # using envsubst for env var replacement
 envsubst < .devcontainer/dynakube.yaml | kubectl apply -f -    
+
+# deploy microservices
+kubectl apply -f ./release_demo/kubernetes-manifests.yaml
