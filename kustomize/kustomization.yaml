@@ -17,6 +17,7 @@ kind: Kustomization
 resources:
 - base
 components:
+- components/remove-loadgen
 # - components/cymbal-branding
 # - components/google-cloud-operations
 # - components/memorystore
