@@ -32,4 +32,4 @@ kubectl apply -k kustomize/.
 kubectl rollout status deployment frontend
 
 # forward all traffic to 8080 on the local machine
-kubectl port-forward deployment/frontend 8080:8080
+kubectl port-forward deployment/frontend 8080:8080 &
