@@ -9,7 +9,7 @@ kind create cluster --config .devcontainer/kind-cluster.yaml --wait 300s
 
 # remove trailing slash on DT_ENDPOINT if it exists
 DT_ENDPOINT=$(echo "$DT_ENDPOINT" | sed "s,/$,,")
-echo "Removed trailing slashes in $DT_ENDPOINT"
+echo "Removed any trailing slashes in DT_ENDPOINT"
 
 # replace the endpoint with user provided value
 # sed -i "s|DT_ENDPOINT|$DT_ENDPOINT|" .devcontainer/dynakube.yaml
@@ -23,3 +23,12 @@ helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operato
 # Apply the Dynakube in ApplicationOnly mode
 # using envsubst for env var replacement
 envsubst < .devcontainer/dynakube.yaml | kubectl apply -f -    
+
+# deploy microservices
+kubectl apply -f ./release_demo/kubernetes-manifests.yaml
+
+# wait for pods to be ready before port forwarding
+kubectl rollout status deployment frontend
+
+# forward all traffic to 8080 on the local machine
+kubectl port-forward deployment/frontend 8080:8080
