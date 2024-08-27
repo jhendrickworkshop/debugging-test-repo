@@ -24,8 +24,9 @@ helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operato
 # using envsubst for env var replacement
 envsubst < .devcontainer/dynakube.yaml | kubectl apply -f -    
 
-# deploy microservices
-kubectl apply -f ./release_demo/kubernetes-manifests.yaml
+# deploy microservices without loadgenerator service
+# Note in kustomize/kustomization.yaml the components/remove-loadgen is enabled
+kubectl apply -k kustomize/.
 
 # wait for pods to be ready before port forwarding
 kubectl rollout status deployment frontend
