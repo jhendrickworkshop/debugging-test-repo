@@ -12,10 +12,6 @@
 	// some base images require a specific user name
 	"remoteUser": "vscode",
 
-	//"features": {
-	//	"ghcr.io/rio/features/k3d:1": {}
-	//},
-
 	// Install extensions
 	"customizations": {
 		"vscode": {	
@@ -30,7 +26,8 @@
 				"gruntfuggly.todo-tree",
 				"mutantdino.resourcemonitor",
 				"humao.rest-client",
-				"ms-vscode.makefile-tools"
+				"ms-vscode.makefile-tools",
+				"dynatrace.dynatrace-debugging-extension"
 			]
 		}
 	},
