@@ -27,6 +27,6 @@ build:
 manifests:
   kustomize:
     paths:
-    - kubernetes-manifests
+    - kubernetes-manifests/adservice
 deploy:
   kubectl: {}
