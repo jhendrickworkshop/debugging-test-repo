@@ -28,10 +28,9 @@ RUN KIND_RELEASE=$(curl --silent "https://api.github.com/repos/kubernetes-sigs/k
     && curl -sSL -o /usr/local/bin/kind https://kind.sigs.k8s.io/dl/$KIND_RELEASE/kind-linux-amd64 \
     && chmod +x /usr/local/bin/kind
 
-# Install K3s
-# Standard installation relies on systemd which devcontainers don't support, so using the binary directly
-# RUN curl -sfL https://get.k3s.io | sh -
-# RUN curl -Lo /usr/local/bin/k3s https://github.com/k3s-io/k3s/releases/download/v1.29.7+k3s1/k3s; chmod a+x /usr/local/bin/k3s
+# Install Skaffold
+RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 \
+    && install skaffold /usr/local/bin/
 
 RUN /tmp/scripts/docker.sh
 
