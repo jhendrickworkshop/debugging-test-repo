@@ -58,15 +58,15 @@ languages that talk to each other over gRPC. It's setup to run inside a Kind Kub
 
 3. The [Dynatrace OneAgent](https://docs.dynatrace.com/docs/setup-and-configuration/setup-on-k8s) will also be deployed in the cluster using the Dynatrace Operator. You can validate the Operator is running by using the following command:
 
-```sh
-kubectl get pods -n dynatrace
-```
+  ```sh
+  kubectl get pods -n dynatrace
+  ```
 
 It should be in a `Running` state:
 
-```
-NAME                                           READY     STATUS    RESTARTS   AGE
-dynatrace-operator-64865586d4-nk5ng   1/1       Running   0          1d
-```
+  ```
+  NAME                                           READY     STATUS    RESTARTS   AGE
+  dynatrace-operator-64865586d4-nk5ng   1/1       Running   0          1d
+  ```
 
 4. You will also have a VSCode environment with the Dynatrace Code Monitoring plugin installed. This is where you will be able to make code changes to fix an application bug, redeploy the changes to the cluster, and then set Live Debugging breakpoints to validate the change.
