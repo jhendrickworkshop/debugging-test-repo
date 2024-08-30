@@ -1,5 +1,12 @@
 # Dynatrace Live Debugger End to End Demo Enviornment
 
+The Demo environment will showcase the following:
+
+- Setup of the Dynatrace OneAgent within a local Kuberentes cluster
+- Debugging an application issue with Dynatraces Live Debugger
+- Fixing a bug, rebuilding and deploying the fix to the cluster using Skaffold
+- Validating the fix directly within the VSCode IDE using Dynatraces Code Monitoring plugin
+
 ## Architecture
 
 This demo uses the **Online Boutique** which is composed of 11 microservices written in different
