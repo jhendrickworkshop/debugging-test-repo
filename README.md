@@ -23,9 +23,9 @@ languages that talk to each other over gRPC. It's setup to run inside a Kind Kub
 
 ## Quickstart
 
-1. Start a codespaces workspace. You will need your Dynatrace Tenenant endpoint as well as a Dynatrace API Token
+1. Start a codespaces workspace by going to Codespaces and then selecting 'New with options' or by [clicking here](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=846712282&skip_quickstart=true). You will need your Dynatrace tenenant endpoint which should look something like 'https://abcd1234.live.dynatrace.com' as well as a Dynatrace API Token.
 
-2. Once started the following services should be running
+2. The codespace will automatically create a [Kind](https://kind.sigs.k8s.io/) Kubernetes cluster and deploy the microservices application. Once the codespaces is started the following services should be running in the Kind cluster:
 
    ```sh
    kubectl get pods
@@ -49,3 +49,17 @@ languages that talk to each other over gRPC. It's setup to run inside a Kind Kub
    shippingservice-6ccc89f8fd-v686r         1/1     Running   0          2m58s
    ```
 
+3. The [Dynatrace OneAgent](https://docs.dynatrace.com/docs/setup-and-configuration/setup-on-k8s) will also be deployed in the cluster using the Dynatrace Operator. You can validate the Operator is running by using the following command:
+
+```sh
+kubectl get pods -n dynatrace
+```
+
+It should be in a `Running` state:
+
+```
+NAME                                           READY     STATUS    RESTARTS   AGE
+dynatrace-operator-64865586d4-nk5ng   1/1       Running   0          1d
+```
+
+4. You will also have a VSCode environment with the Dynatrace Code Monitoring plugin installed. This is where you will be able to make code changes to fix an application bug, redeploy the changes to the cluster, and then set Live Debugging breakpoints to validate the change.
