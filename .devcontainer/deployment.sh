@@ -12,7 +12,7 @@ kind create cluster --config .devcontainer/kind-cluster.yaml --wait 300s
 DT_ENDPOINT=$(echo "$DT_ENDPOINT" | sed "s,/$,,")
 echo "Removed any trailing slashes in DT_ENDPOINT"
 # Base64 encode DT_TOKEN
-DT_TOKEN=$(echo $DT_TOKEN | base64 -w 0)
+DT_TOKEN=$(echo -n $DT_TOKEN | base64)
 
 # replace the endpoint with user provided value
 # sed -i "s|DT_ENDPOINT|$DT_ENDPOINT|" .devcontainer/dynakube.yaml
