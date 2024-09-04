@@ -109,8 +109,8 @@ public final class AdService {
           allAds = service.getRandomAds();
         }
 
-        // Return an empty ad 25% of the time
-        int randomNum = getRandomNumberUsingNextInt(0,4);
+        // Return an empty ad 50% of the time
+        int randomNum = getRandomNumberUsingNextInt(0,2);
         if (randomNum == 0) {
           allAds.clear();
           allAds.add(Ad.newBuilder()
@@ -127,7 +127,7 @@ public final class AdService {
         responseObserver.onError(e);
       }
     }
-    private int getRandomNumberUsingNextInt(int min, int max) {
+    public int getRandomNumberUsingNextInt(int min, int max) {
       Random random = new Random();
       return random.nextInt(max - min) + min;
     }    
