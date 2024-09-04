@@ -5,7 +5,7 @@ The Demo environment will showcase the following:
 - Setup of the Dynatrace OneAgent within a local Kuberentes cluster
 - Debugging an application issue with Dynatraces Live Debugger
 - Fixing a bug, rebuilding and deploying the fix to the cluster using Skaffold
-- Validating the fix directly within the VSCode IDE using Dynatraces Code Monitoring plugin
+- Validating the fix directly within the VSCode IDE using Dynatraces Code Monitoring extension
 
 ## Architecture
 
@@ -69,7 +69,7 @@ It should be in a `Running` state:
   kind-k8s   https://abc123.live.dynatrace.com/api     Running      98s
   ```
 
-4. You will also have a VSCode environment with the Dynatrace Code Monitoring plugin installed. This is where you will be able to make code changes to fix an application bug, redeploy the changes to the cluster, and then set Live Debugging breakpoints to validate the change.
+4. You will also have a VSCode environment with the Dynatrace Code Monitoring extension installed. This is where you will be able to make code changes to fix an application bug, redeploy the changes to the cluster, and then set Live Debugging breakpoints to validate the change.
 
 5. Next, forward traffic from the service to your local machine using:
 
@@ -95,4 +95,27 @@ nohup kubectl port-forward deployment/frontend 8080:8080 &
 
 14. We'll now go back to our Codespaces VSCode IDE to fix the issue, redeploy the AdService and then validate the issue by collecting data directly in the IDE.
 
-15. In the left hand panel click on the 'Dynatrace Debugger icon. Then click 'Open Dynatrace snapshots pane'.
+15. Let's fix the issue. Open up the 'src/adservice/src/main/java/hipstershop/AdService.java' file. Comment out lines 113-120 which is causing the AdService to return an empty ad.
+
+```
+int randomNum = getRandomNumberUsingNextInt(0,2);
+        if (randomNum == 0) {
+          allAds.clear();
+          allAds.add(Ad.newBuilder()
+            .setRedirectUrl("")
+            .setText("")
+            .build());
+        }
+```
+
+16. Now we'll need to rebuild and redeploy the app to our Kuberentes cluster. Go to the terminal and run the following command which will rebuild and redeploy just the AdService using Skaffold:
+
+```sh
+skaffold run -f=skaffold-adservice.yaml
+```
+
+17. This should build the image from the Dockerfile and deploy the new container out to the Kind Kuberentes cluster. Wait for the new pod to be up and running.
+
+18. We can now collect additional snapshots to validate that we no longer receive receive Ad's with empty text data. This time, let's do it in the VSCode IDE extension.
+
+19. Make sure you have a terminal open and click on the Dynatrace Debugger extension from the left hand panel of VSCode. In the terminal window section click on the Dynatrace Snapshots tab.
