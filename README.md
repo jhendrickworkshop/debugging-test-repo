@@ -94,3 +94,5 @@ nohup kubectl port-forward deployment/frontend 8080:8080 &
 13. Navigate back to the Live Debugger and view the collected snapshots. You should see the most recent captured snapshot data contains a variable called 'allAds' which contains a single ad with empty data for the 'text_' and 'redirectUrl_' fields. This is likely the root of the problem, it's expecting to receive valid data, but the ad data is empty.
 
 14. We'll now go back to our Codespaces VSCode IDE to fix the issue, redeploy the AdService and then validate the issue by collecting data directly in the IDE.
+
+15. In the left hand panel click on the 'Dynatrace Debugger icon. Then click 'Open Dynatrace snapshots pane'.
