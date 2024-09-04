@@ -70,3 +70,27 @@ It should be in a `Running` state:
   ```
 
 4. You will also have a VSCode environment with the Dynatrace Code Monitoring plugin installed. This is where you will be able to make code changes to fix an application bug, redeploy the changes to the cluster, and then set Live Debugging breakpoints to validate the change.
+
+5. Next, forward traffic from the service to your local machine using:
+
+```sh
+nohup kubectl port-forward deployment/frontend 8080:8080 &
+```
+
+6. Click the popup that appears to open the application in a new tab, or navigate to the "Ports" tab from the terminal and copy the URL from the row with port 8080.
+
+7. The application contains a bug where product ads are disappearing 25% of the time. We'll take a look at how we can capture live data using the Live Debugger and also make a fix, then validate the results directly in the VSCode IDE.
+
+8. Navigate to a Product page where you'll see an Ad section. Refresh the page a few times and you'll see in some cases the ad is disappearing. Let's set some non-breaking breakpoints to validate what data we're actually getting back within the code.
+
+9. Navigate to the Live Debugger app within the Dynatrace tenant and click the 'Debug Configuration' button to select the service we want to debug. In the 'Filter by:' text box, type in 'AdService' and select one of the labels for the Ad Service, for example 'dt.kubernetes.workload.name: adservice' and click next.
+
+10. Next you'll need to click the "+" button and select the 'Local Filesystem' option to download the Dynatrace Desktop App. Install the desktop app and start it up. Note that you'll also need to clone this repository so that you have the code locally on your system. Once done, navigate to the repository on your local system and choose 'Done' to be taken into the debugger.
+
+11. Navigate to the AdService.java file by navigating the file system or by using the search button (Cmd/Ctrl+Shift+F)
+
+12. Set a breakpoint on Line 122 by clicking to the left of the line number in the gutter. Go back to your application on the product page and refresh a few times until you see one of the ads disappear and then stop.
+
+13. Navigate back to the Live Debugger and view the collected snapshots. You should see the most recent captured snapshot data contains a variable called 'allAds' which contains a single ad with empty data for the 'text_' and 'redirectUrl_' fields. This is likely the root of the problem, it's expecting to receive valid data, but the ad data is empty.
+
+14. We'll now go back to our Codespaces VSCode IDE to fix the issue, redeploy the AdService and then validate the issue by collecting data directly in the IDE.
