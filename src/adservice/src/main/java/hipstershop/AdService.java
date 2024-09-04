@@ -108,6 +108,17 @@ public final class AdService {
           // Serve random ads.
           allAds = service.getRandomAds();
         }
+
+        // Return an empty ad 25% of the time
+        int randomNum = getRandomNumberUsingNextInt(0,4);
+        if (randomNum == 0) {
+          allAds.clear();
+          allAds.add(Ad.newBuilder()
+            .setRedirectUrl("")
+            .setText("")
+            .build());
+        }
+        
         AdResponse reply = AdResponse.newBuilder().addAllAds(allAds).build();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
@@ -116,6 +127,10 @@ public final class AdService {
         responseObserver.onError(e);
       }
     }
+    private int getRandomNumberUsingNextInt(int min, int max) {
+      Random random = new Random();
+      return random.nextInt(max - min) + min;
+    }    
   }
 
   private static final ImmutableListMultimap<String, Ad> adsMap = createAdsMap();
