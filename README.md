@@ -116,6 +116,12 @@ skaffold run -f=skaffold-adservice.yaml
 
 17. This should build the image from the Dockerfile and deploy the new container out to the Kind Kuberentes cluster. Wait for the new pod to be up and running.
 
-18. We can now collect additional snapshots to validate that we no longer receive receive Ad's with empty text data. This time, let's do it in the VSCode IDE extension.
+18. We can now collect additional snapshots to validate that we no longer receive Ad's with empty text data. This time, let's do it with the VSCode IDE extension. Authentication from the codespaces VSCode extension isn't supported, so you'll need to make sure you have a copy of the code cloned locally and a local installation of [VSCode](https://code.visualstudio.com/).
 
-19. Make sure you have a terminal open and click on the Dynatrace Debugger extension from the left hand panel of VSCode. In the terminal window section click on the Dynatrace Snapshots tab.
+19. Within VSCode, navigate to Code > Settings > Extensions. Search for Dynatrace and install the [Code Monitoring](https://marketplace.visualstudio.com/items?itemName=dynatrace.dynatrace-debugging-extension) extension. You should see the Dynatrace logo in the left hand VSCode menu once it's installed. Click on the Dynatrace logo and then 'Open Dynatrace Snapshots pane'. This will open a terminal window and bring you to the 'Dynatrace Snapshots' tab where you can login to your tenant.
+
+20. Click on 'Log In'. A browser should open where you can authenticate. After logging in, you can open your locally cloned repository by going to File > Open and browsing to the live debugging microservices project you cloned. Let's open the AdService.java file under 'src/adservice/main/java/hipstershop/AdService.java.
+
+21. Before settings a breakpoint, we need to make sure to choose the correct Environment and Filters to use within the extension. In the top right corner of the Dynatrace Snapshots terminal window you'll see a cloud icon. Click on it and set the same tenant environment you've been using for the exercises so far. Next click on the pencil icon and set the same filter that you used previously, for example, 'dt.kubernetes.workload.name: adservice'. 
+
+22. Finally we're ready to set a breakpoint. You will have a new type of breakpoint available that can be set after installing the Code Monitoring extension. In AdService.java right click to the left of line 122 and select 'Add Live Debugging Breakpoint'. Now go back to your shop application on the product page and refresh a few times until you see snapshots appear in your IDE. Validate that the bug was fixed and you no longer see ads with empty text.
