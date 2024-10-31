@@ -27,7 +27,6 @@
 				"mutantdino.resourcemonitor",
 				"humao.rest-client",
 				"ms-vscode.makefile-tools",
-				"dynatrace.dynatrace-debugging-extension"
 			]
 		}
 	},
@@ -54,6 +53,8 @@
 
 	// // Add recommended secrets
 	"secrets": {
-
+		"DD_TOKEN": {
+	    	        "description": "DD API token"
+		}
 	}
 }
