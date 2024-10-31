@@ -6,6 +6,7 @@ kind create cluster --config .devcontainer/kind-cluster.yaml --wait 300s
 helm repo add datadog https://helm.datadoghq.com
 helm install datadog-operator datadog/datadog-operator
 kubectl create secret generic datadog-secret --from-literal api-key=f72eefd69871937ee5d0394f9694dc87
+kubectl apply -f datadog-agent.yaml
 
 # deploy microservices without loadgenerator service
 # Note in kustomize/kustomization.yaml the components/remove-loadgen is enabled
