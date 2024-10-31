@@ -7,4 +7,4 @@ spec:
     credentials:
       apiSecret:
         secretName: datadog-secret
-        keyName: f72eefd69871937ee5d0394f9694dc87
+        keyName: api-key
