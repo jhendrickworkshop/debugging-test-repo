@@ -39,7 +39,7 @@
 
 	// add labels
 	"portsAttributes": {
-		"8080": { "label": "Otel Demo" }
+		"8080": { "label": "Microservices Demo" }
 	},
 
 	"hostRequirements": {
@@ -54,11 +54,6 @@
 
 	// // Add recommended secrets
 	"secrets": {
-	 	  "DT_ENDPOINT": {
-	 		"description": "eg. https://abc12345.live.dynatrace.com"
-		},
-		  "DT_TOKEN": {
-	    	        "description": "Dynatrace API token"
-		}
+
 	}
 }
