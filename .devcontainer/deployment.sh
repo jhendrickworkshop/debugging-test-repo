@@ -5,7 +5,7 @@ kind create cluster --config .devcontainer/kind-cluster.yaml --wait 300s
 # install the Dynatrace operator
 helm repo add datadog https://helm.datadoghq.com
 helm install datadog-operator datadog/datadog-operator
-kubectl create secret generic datadog-secret --from-literal api-key=f72eefd69871937ee5d0394f9694dc87
+kubectl create secret generic datadog-secret --from-literal api-key=$DD_TOKEN
 kubectl apply -f .devcontainer/datadog-agent.yaml
 
 # deploy microservices without loadgenerator service
